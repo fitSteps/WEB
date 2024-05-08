@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import Requests from "./components/Requests";
 import Friends from "./components/Friends";
+import Events from "./components/Events";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/requests" element={<Requests />}></Route>
             <Route path="/friends" element={<Friends />}></Route>
+            <Route path="/events" element={<Events />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
