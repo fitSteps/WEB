@@ -9,6 +9,7 @@ import Logout from "./components/Logout";
 import Requests from "./components/Requests";
 import Friends from "./components/Friends";
 import Events from "./components/Events";
+import DataFaker from './components/DataFaker';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
             <Route path="/requests" element={<Requests />}></Route>
             <Route path="/friends" element={<Friends />}></Route>
             <Route path="/events" element={<Events />}></Route>
+            <Route path="/datafaker" element={<DataFaker />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
