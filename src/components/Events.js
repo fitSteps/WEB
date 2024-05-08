@@ -26,12 +26,15 @@ function Events() {
             <h1>Events List</h1>
             <ul>
                 {events.map((event, index) => (
-                    <li key={index}>
+                    <a href={event.link} style={{ textDecoration: 'none', color:'black' }}>
+                        <li key={index} >
                         <h3>{event.title}</h3>
-                        <p>{event.day}. {event.dayOfWeek}, {event.month} {event.year}</p>
-                        <p>{event.city}</p>
+                        <p>Datum in čas: {event.dayOfWeek}, {event.day}. {event.month} {event.year} - {event.time}</p>
+                        <p>Lokacija: {event.location}</p>
                         
-                    </li>
+                        </li>
+                    </a>
+                    
                 ))}
             </ul>
         </div>
