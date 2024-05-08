@@ -6,6 +6,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
+import Requests from "./components/Requests";
+import Friends from "./components/Friends";
+
 
 function App() {
   /**
@@ -50,6 +53,8 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/requests" element={<Requests />}></Route>
+            <Route path="/friends" element={<Friends />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
