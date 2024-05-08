@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from "./userContext";
 import Header from "./components/Header";
@@ -45,7 +45,7 @@ function App() {
         <div className="App">
           <Header title="My application"></Header>
           <Routes>
-            <Route path="/"></Route>
+            <Route path="/" element={<Profile />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
