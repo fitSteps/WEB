@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 function DataFaker() {
-    const [date] = useState("2024-05-08");
     const [steps, setSteps] = useState(0);
     const [distance, setDistance] = useState(0);
     const [flightsClimbed, setFlightsClimbed] = useState(0);
@@ -13,7 +12,8 @@ function DataFaker() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();  // Prevent default form submission
-        var date = "2024-05-08";
+        
+        var date = "2024-05-12";
         const response = await fetch(`http://localhost:3001/users/movements/${date}`, {
             method: 'PUT',
             credentials: 'include',

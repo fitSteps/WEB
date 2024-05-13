@@ -4,6 +4,8 @@ function Register() {
     const [username, setUsername] = useState([]);
     const [password, setPassword] = useState([]);
     const [email, setEmail] = useState([]);
+    const [height, setHeight] = useState([]);
+    const [weight, setWeight] = useState([]);
     const [error, setError] = useState([]);
 
     async function Register(e){
@@ -15,7 +17,9 @@ function Register() {
             body: JSON.stringify({
                 email: email,
                 username: username,
-                password: password
+                password: password,
+                height: height,
+                weight: weight
             })
         });
         const data = await res.json();
@@ -26,6 +30,8 @@ function Register() {
             setUsername("");
             setPassword("");
             setEmail("");
+            setHeight("");
+            setWeight("");
             setError("Registration failed");
         }
     }
@@ -35,6 +41,8 @@ function Register() {
             <input type="text" name="email" placeholder="Email" value={email} onChange={(e)=>(setEmail(e.target.value))} />
             <input type="text" name="username" placeholder="Username" value={username} onChange={(e)=>(setUsername(e.target.value))}/>
             <input type="password" name="password" placeholder="Password" value={password} onChange={(e)=>(setPassword(e.target.value))} />
+            <input type='number' name='height' placeholder='Height' value={height} onChange={(e)=>(setHeight(e.target.value))} />
+            <input type='number' name='weight' placeholder='Weight' value={weight} onChange={(e)=>(setWeight(e.target.value))} />
             <input type="submit" name="submit" value="Login" />
             <label>{error}</label>
         </form>

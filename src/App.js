@@ -10,6 +10,7 @@ import Requests from "./components/Requests";
 import Friends from "./components/Friends";
 import Events from "./components/Events";
 import DataFaker from './components/DataFaker';
+import Home from './components/Home';
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
         <div className="App">
           <Header title="My application"></Header>
           <Routes>
-            <Route path="/" element={<Profile />}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
