@@ -11,6 +11,8 @@ import Friends from "./components/Friends";
 import Events from "./components/Events";
 import DataFaker from './components/DataFaker';
 import Home from './components/Home';
+import Leaderboard from './components/Leaderboard';
+
 
 
 function App() {
@@ -60,6 +62,7 @@ function App() {
             <Route path="/friends" element={<Friends />}></Route>
             <Route path="/events" element={<Events />}></Route>
             <Route path="/datafaker" element={<DataFaker />}></Route>
+            <Route path="/leaderboard" element={<Leaderboard />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
