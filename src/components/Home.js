@@ -42,11 +42,11 @@ function Home() {
     return (
         <>
             {!userContext.user ? <Navigate replace to="/login" /> : null}
-            <h1>User Movement</h1>
+            <h1>User Movement from {selectedDate.toISOString().split('T')[0]}</h1>
             <p>Points: {profile.points}</p>
             <p>Steps: {movements.steps}</p>
             <p>Distance: {movements.distance}</p>
-            <p>Date: {selectedDate.toISOString().split('T')[0]}</p>
+            <p>Flights Climbed: {movements.flightsClimbed}</p>
             <p>Calories: {movements.calories}</p>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <button onClick={() => handleDateChange(subDays(selectedDate, 1))}>Left (-1 day)</button>

@@ -26,7 +26,7 @@ function Profile() {
 
 
     const getMovements = async () => {
-        const date = "2024-05-13";
+        const date = "2024-05-15";
         const res = await fetch(`http://localhost:3001/users/movements/${date}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }, credentials: "include"
