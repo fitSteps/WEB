@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../userContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Requests() {
     const [requests, setRequests] = useState([]);
@@ -39,17 +41,61 @@ function Requests() {
         }
     };
 
+    const handleReject = async (friendId) => {
+        const response = await fetch(`http://localhost:3001/users/reject-friend/${friendId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        });
+        if (response.status === 200) {
+            fetchRequests();  // Refresh the requests list after rejecting
+        } else {
+            const data = await response.json();
+            alert(data.message);  // Display error message from the server
+        }
+    };
+
     return (
-        <div>
-            <h1>Friend Requests</h1>
-            <ul>
-                {requests.length > 0 ? requests.map(req => (
-                    <li key={req._id}>
-                        {req.username} - {req.email}
-                        <button onClick={() => handleAccept(req._id)}>Accept</button>
-                    </li>
-                )) : <p>No friend requests found.</p>}
-            </ul>
+        <div className="container mt-5">
+            <h1 className="text-center mb-4">Friend Requests</h1>
+            {requests.length > 0 ? (
+                <ul className="list-group">
+                    {requests.map(req => (
+                        <Link 
+                            to={`/profile/${req._id}`} 
+                            key={req._id} 
+                            className="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-decoration-none"
+                        >
+                            <div>
+                                <h5 className="mb-1">{req.username}</h5>
+                                <p className="mb-1">{req.email}</p>
+                            </div>
+                            <div>
+                                <button 
+                                    className="btn btn-primary me-2" 
+                                    onClick={(e) => {
+                                        e.preventDefault(); // Prevent the default link action
+                                        handleAccept(req._id);
+                                    }}
+                                >
+                                    Accept
+                                </button>
+                                <button 
+                                    className="btn btn-danger" 
+                                    onClick={(e) => {
+                                        e.preventDefault(); // Prevent the default link action
+                                        handleReject(req._id);
+                                    }}
+                                >
+                                    Reject
+                                </button>
+                            </div>
+                        </Link>
+                    ))}
+                </ul>
+            ) : (
+                <p className="text-center">No friend requests found.</p>
+            )}
         </div>
     );
 }

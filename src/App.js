@@ -12,7 +12,10 @@ import Events from "./components/Events";
 import DataFaker from './components/DataFaker';
 import Home from './components/Home';
 import Leaderboard from './components/Leaderboard';
-import Movement from './components/Leaderboard';
+import UserProfile from './components/UserProfile';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 
 
 
@@ -59,6 +62,7 @@ function App() {
             <Route path="/login" exact element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/profile/:userId" element={<UserProfile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/requests" element={<Requests />}></Route>
             <Route path="/friends" element={<Friends />}></Route>

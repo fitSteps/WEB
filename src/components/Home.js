@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, subDays } from 'date-fns';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Home() {
     const userContext = useContext(UserContext);
@@ -40,28 +41,34 @@ function Home() {
     };
 
     return (
-        <>
+        <div className="container mt-5">
             {!userContext.user ? <Navigate replace to="/login" /> : null}
-            <h1>User Movement from {selectedDate.toISOString().split('T')[0]}</h1>
-            <p>Points: {profile.points}</p>
-            <p>Steps: {movements.steps}</p>
-            <p>Distance: {movements.distance}</p>
-            <p>Flights Climbed: {movements.flightsClimbed}</p>
-            <p>Calories: {movements.calories}</p>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <button onClick={() => handleDateChange(subDays(selectedDate, 1))}>Left (-1 day)</button>
-                <DatePicker 
-                    selected={selectedDate} 
-                    onChange={handleDateChange} 
-                    dateFormat="yyyy-MM-dd" 
+            <h1 className="text-center mb-4">Stats from {selectedDate.toISOString().split('T')[0]}</h1>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Your Profile Stats Information</h5>
+                    <p className="card-text">Points: {(profile.points / 1).toFixed(0)}</p>
+                    <p className="card-text">Steps: {movements.steps}</p>
+                    <p className="card-text">Distance: {(movements.distance / 1000).toFixed(2)} km</p>
+                    <p className="card-text">Flights Climbed: {movements.flightsClimbed}</p>
+                    <p className="card-text">Calories: {(movements.calories / 1).toFixed(0)}</p>
+                </div>
+            </div>
+            <div className="d-flex justify-content-center align-items-center mb-4">
+                <button className="btn btn-secondary me-2" onClick={() => handleDateChange(subDays(selectedDate, 1))}>-1 day</button>
+                <DatePicker
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    dateFormat="yyyy-MM-dd"
                     includeDateIntervals={[
-                        { start: subDays(profile.dateOfCreating, 1), end: new Date() }
+                        { start: subDays(new Date(profile.dateOfCreating), 1), end: new Date() }
                     ]}
                     todayButton="Today"
+                    className="form-control"
                 />
-                <button onClick={() => handleDateChange(addDays(selectedDate, 1))}>Right (+1 day)</button>
+                <button className="btn btn-secondary ms-2" onClick={() => handleDateChange(addDays(selectedDate, 1))}>+1 day</button>
             </div>
-        </>
+        </div>
     );
 }
 

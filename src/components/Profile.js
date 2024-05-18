@@ -1,41 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../userContext';
 import { Navigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Profile() {
-    const userContext = useContext(UserContext); 
+    const userContext = useContext(UserContext);
     const [profile, setProfile] = useState({});
-    const [movements, setMovements] = useState([]);
-    const [usernameToAdd, setUsernameToAdd] = useState(""); // Define usernameToAdd state variable
+    const [usernameToAdd, setUsernameToAdd] = useState("");
 
-    useEffect(function() {
-        const getProfile = async function() {
-            const res = await fetch("http://localhost:3001/users/profile", {credentials: "include"});
+    useEffect(() => {
+        const getProfile = async () => {
+            const res = await fetch("http://localhost:3001/users/profile", { credentials: "include" });
             const data = await res.json();
             setProfile(data);
-        }
+        };
         getProfile();
-        getMovements();
     }, []);
-
-    const getProfile = async function() {
-        const res = await fetch("http://localhost:3001/users/profile", {credentials: "include"});
-        const data = await res.json();
-        setProfile(data);
-    };
-
-
-    const getMovements = async () => {
-        const date = "2024-05-15";
-        const res = await fetch(`http://localhost:3001/users/movements/${date}`, {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' }, credentials: "include"
-        });
-        const data = await res.json();
-        console.log(data);
-        console.log(data.steps);
-        setMovements(data);
-    };
 
     const handleAddFriend = async () => {
         const res = await fetch(`http://localhost:3001/users/addFriendRequest`, {
@@ -45,22 +25,34 @@ function Profile() {
             credentials: "include"
         });
         const data = await res.json();
-        alert(data.message); 
+        alert(data.message);
     };
 
     return (
-        <>
+        <div className="container mt-5">
             {!userContext.user ? <Navigate replace to="/login" /> : null}
-            <h1>User Profile</h1>
-            <p>Username: {profile.username}</p>
-            <p>Email: {profile.email}</p>
-            <p>Steps: {movements.steps}</p>
-            <p>Distance: {movements.distance}</p>
-            <p>Date: {(movements.date)}</p>
-            <p>Calories: {movements.calories}</p>
-            <input type="text" value={usernameToAdd} onChange={(e) => setUsernameToAdd(e.target.value)} placeholder="Add friend by username" />
-            <button onClick={handleAddFriend}>Add</button>
-        </>
+            <h1 className="text-center mb-4">{profile.username}'s Profile</h1>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Your Profile Information</h5>
+                    <p className="card-text">Username: {profile.username}</p>
+                    <p className="card-text">Email: {profile.email}</p>
+                    <p className="card-text">Height: {profile.height}</p>
+                    <p className="card-text">Weight: {profile.weight}</p>
+                    <p className="card-text">Date of Creation: {profile.dateOfCreating}</p>
+                    <p className="card-text">Total Points: {(profile.points / 1).toFixed(0)}</p>
+                </div>
+            </div>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Add Friend</h5>
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" value={usernameToAdd} onChange={(e) => setUsernameToAdd(e.target.value)} placeholder="Add friend by username" />
+                        <button className="btn btn-primary" onClick={handleAddFriend}>Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

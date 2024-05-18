@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Events() {
     const [events, setEvents] = useState([]);
@@ -22,21 +23,17 @@ function Events() {
     };
 
     return (
-        <div>
-            <h1>Events List</h1>
-            <ul>
+        <div className="container mt-5">
+            <h1 className="text-center mb-4">Events List</h1>
+            <div className="list-group">
                 {events.map((event, index) => (
-                    <a href={event.link} style={{ textDecoration: 'none', color:'black' }}>
-                        <li key={index} >
-                        <h3>{event.title}</h3>
-                        <p>Datum in čas: {event.dayOfWeek}, {event.day}. {event.month} {event.year} - {event.time}</p>
-                        <p>Lokacija: {event.location}</p>
-                        
-                        </li>
+                    <a href={event.link} className="list-group-item list-group-item-action" key={index} style={{ textDecoration: 'none' }}>
+                        <h3 className="mb-1">{event.title}</h3>
+                        <p className="mb-1">Datum in čas: {event.dayOfWeek}, {event.day}. {event.month} {event.year} - {event.time}</p>
+                        <p className="mb-1">Lokacija: {event.location}</p>
                     </a>
-                    
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }

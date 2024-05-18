@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function DataFaker() {
     const [steps, setSteps] = useState(0);
@@ -24,14 +25,35 @@ function DataFaker() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type='number' value={steps} onChange={(e) => setSteps(e.target.value)} placeholder='Number of steps'/>
-                <input type='number' value={distance} onChange={(e) => setDistance(e.target.value)} placeholder='Distance'/>
-                <input type='number' value={flightsClimbed} onChange={(e) => setFlightsClimbed(e.target.value)} placeholder='Flights climbed'/>
-                <input type='number' value={calories} onChange={(e) => setCalories(e.target.value)} placeholder='Calories'/>
-                <button type='submit'>Submit</button>
-            </form>
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <h3 className="card-title text-center mb-4">Data Faker</h3>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="steps" className="form-label">Number of Steps</label>
+                                    <input type="number" className="form-control" id="steps" value={steps} onChange={(e) => setSteps(e.target.value)} placeholder="Number of steps" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="distance" className="form-label">Distance</label>
+                                    <input type="number" className="form-control" id="distance" value={distance} onChange={(e) => setDistance(e.target.value)} placeholder="Distance" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="flightsClimbed" className="form-label">Flights Climbed</label>
+                                    <input type="number" className="form-control" id="flightsClimbed" value={flightsClimbed} onChange={(e) => setFlightsClimbed(e.target.value)} placeholder="Flights climbed" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="calories" className="form-label">Calories</label>
+                                    <input type="number" className="form-control" id="calories" value={calories} onChange={(e) => setCalories(e.target.value)} placeholder="Calories" />
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
