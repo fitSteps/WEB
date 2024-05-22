@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from "./userContext";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
@@ -16,62 +17,35 @@ import UserProfile from './components/UserProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-
-
-
-
 function App() {
-  /**
-   * Podatek o tem, ali je uporabnik prijavljen ali ne, bomo potrebovali v vseh komponentah.
-   * State je dosegljiv samo znotraj trenutne komponente. Če želimo deliti spremenljivke z
-   * ostalimi komponentami, moramo uporabiti Context.
-   * Vsebino Contexta smo definirali v datoteki userContext.js. Poleg objekta 'user', potrebujemo
-   * še funkcijo, ki bo omogočala posodabljanje te vrednosti. To funkcijo definiramo v komponenti App
-   * (updateUserData). V render metodi pripravimo UserContext.Provider, naš Context je potem dosegljiv
-   * v vseh komponentah, ki se nahajajo znotraj tega providerja.
-   * V komponenti Login ob uspešni prijavi nastavimo userContext na objekt s trenutno prijavljenim uporabnikom.
-   * Ostale komponente (npr. Header) lahko uporabijo UserContext.Consumer, da dostopajo do prijavljenega
-   * uporabnika.
-   * Context se osveži, vsakič ko osvežimo aplikacijo v brskalniku. Da preprečimo neželeno odjavo uporabnika,
-   * lahko context trajno hranimo v localStorage v brskalniku.
-   */
   const [user, setUser] = useState(localStorage.user ? JSON.parse(localStorage.user) : null);
   const updateUserData = (userInfo) => {
     localStorage.setItem("user", JSON.stringify(userInfo));
     setUser(userInfo);
   }
 
-  /**
-   * Na vrhu vključimo komponento Header, z naslovom in menijem.
-   * Nato vključimo Router, ki prikaže ustrezno komponento v odvisnosti od URL naslova.
-   * Pomembno je, da za navigacijo in preusmeritve uporabljamo komponenti Link in Navigate, ki sta
-   * definirani v react-router-dom modulu. Na ta način izvedemo navigacijo brez osveževanja
-   * strani. Klasične metode (<a href=""> in window.location) bi pomenile osvežitev aplikacije
-   * in s tem dodatno obremenitev (ponovni izris komponente Header, ponastavitev Contextov,...)
-   */
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{
-        user: user,
-        setUserContext: updateUserData
-      }}>
-        <div className="App">
+      <UserContext.Provider value={{ user: user, setUserContext: updateUserData }}>
+        <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Header title="My application"></Header>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/login" exact element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/profile/:userId" element={<UserProfile />}></Route>
-            <Route path="/logout" element={<Logout />}></Route>
-            <Route path="/requests" element={<Requests />}></Route>
-            <Route path="/friends" element={<Friends />}></Route>
-            <Route path="/events" element={<Events />}></Route>
-            <Route path="/datafaker" element={<DataFaker />}></Route>
-            <Route path="/leaderboard" element={<Leaderboard />}></Route>
-            <Route path="/movements" element={<Leaderboard />}></Route>
-            
-          </Routes>
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/login" exact element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/profile/:userId" element={<UserProfile />}></Route>
+              <Route path="/logout" element={<Logout />}></Route>
+              <Route path="/requests" element={<Requests />}></Route>
+              <Route path="/friends" element={<Friends />}></Route>
+              <Route path="/events" element={<Events />}></Route>
+              <Route path="/datafaker" element={<DataFaker />}></Route>
+              <Route path="/leaderboard" element={<Leaderboard />}></Route>
+              <Route path="/movements" element={<Leaderboard />}></Route>
+            </Routes>
+          </div>
+          <Footer></Footer>
         </div>
       </UserContext.Provider>
     </BrowserRouter>
