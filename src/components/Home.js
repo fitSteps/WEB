@@ -100,8 +100,9 @@ function Home() {
                     display: false,
                 },
                 ticks: {
-                    callback: function(value, index, values) {
-                        return value;
+                    callback: function(val, index) {
+                        // Format dates as 'day.month.year'
+                        return weeklyData[index] ? format(new Date(weeklyData[index].date), 'dd.MM.yyyy') : '';
                     }
                 }
             },
@@ -138,7 +139,8 @@ function Home() {
                         return label;
                     },
                     title: function(tooltipItems) {
-                        return format(new Date(tooltipItems[0].label), 'MMM dd, yyyy');
+                        // Also format tooltip titles to 'day.month.year'
+                        return format(new Date(tooltipItems[0].label), 'dd.MM.yyyy');
                     }
                 },
                 usePointStyle: true,
@@ -187,7 +189,7 @@ function Home() {
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={handleDateChange}
-                                dateFormat="yyyy-MM-dd"
+                                dateFormat="dd.MM.yyyy"
                                 includeDateIntervals={[
                                     { start: subDays(new Date(profile.dateOfCreating), 1), end: new Date() }
                                 ]}
@@ -204,7 +206,7 @@ function Home() {
                         <DatePicker
                             selected={chartDate}
                             onChange={handleChartDateChange}
-                            dateFormat="yyyy-MM-dd"
+                            dateFormat="dd.MM.yyyy"
                             todayButton="Today"
                             className="form-control"
                         />
