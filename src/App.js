@@ -29,7 +29,7 @@ function App() {
       <UserContext.Provider value={{ user: user, setUserContext: updateUserData }}>
         <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Header title="My application"></Header>
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, overflow: 'auto', minHeight: 'calc(100vh - 100px)' }}>
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/login" exact element={<Login />}></Route>
