@@ -140,7 +140,7 @@ function Home() {
                     },
                     title: function(tooltipItems) {
                         // Also format tooltip titles to 'day.month.year'
-                        return format(new Date(tooltipItems[0].label), 'dd.MM.yyyy');
+                        return format(new Date(tooltipItems[0].label), 'dd/MM/yyyy');
                     }
                 },
                 usePointStyle: true,
@@ -185,11 +185,11 @@ function Home() {
                         <p className="card-text">Calories: {(movements.calories / 1).toFixed(0)}</p>
                     </div>
                     <div className="d-flex justify-content-center align-items-center mb-4">
-                            <button className="btn btn-secondary me-2" onClick={() => handleDateChange(subDays(selectedDate, 1))}>PREVIOS DAY</button>
+                            <button className="btn btn-secondary me-2" onClick={() => handleDateChange(subDays(selectedDate, 1))}>PREVIOUS DAY</button>
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={handleDateChange}
-                                dateFormat="dd.MM.yyyy"
+                                dateFormat="dd/MM/yyyy"
                                 includeDateIntervals={[
                                     { start: subDays(new Date(profile.dateOfCreating), 1), end: new Date() }
                                 ]}
@@ -202,11 +202,11 @@ function Home() {
                 <div className="chart-container" style={{ width: '100%', maxWidth: '600px', height: '400px', flex: 2 }}>
                     <Bar data={data} options={options} />
                     <div className="d-flex justify-content-center align-items-center mb-4">
-                        <button className="btn btn-info me-2" onClick={() => handleChartDateChange(subWeeks(chartDate, 1))}>PREVIOS WEEK</button>
+                        <button className="btn btn-info me-2" onClick={() => handleChartDateChange(subWeeks(chartDate, 1))}>PREVIOUS WEEK</button>
                         <DatePicker
                             selected={chartDate}
                             onChange={handleChartDateChange}
-                            dateFormat="dd.MM.yyyy"
+                            dateFormat="dd/MM/yyyy"
                             todayButton="Today"
                             className="form-control"
                         />
