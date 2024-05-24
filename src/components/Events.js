@@ -149,11 +149,14 @@ function Events() {
                                 click: () => handleMarkerClick(event, index),
                             }}
                         >
-                            <Popup>
+                            <Popup>                                
                                 <a href={event.link} style={{ textDecoration: 'none', color: 'black' }}>
-                                    <b>{event.title}</b><br/>
-                                    {event.dayOfWeek}, {event.day} {event.month} {event.year} - {event.time}<br/>
-                                    {event.location}
+                                    <div>
+                                        <b>{event.title}</b><br/>
+                                        {event.dayOfWeek}, {event.day} {event.month} {event.year} - {event.time}<br/>
+                                        {event.location}<br/>
+                                        <p><b>CLICK ME FOR REGISTRATION</b></p>
+                                    </div>                                    
                                 </a>
                             </Popup>
                         </Marker>
@@ -162,12 +165,10 @@ function Events() {
             
             <div className="list-group mt-3">
                 {filteredEvents.map((event, index) => (
-                    <div className="list-group-item" key={index}>
+                    <div className="list-group-item" key={index}  onClick={() => handleViewOnMap(event, index)}>
                         <h3 className="mb-1">{event.title}</h3>
                         <p className="mb-1">Date and Time: {event.dayOfWeek}, {event.day}. {event.month} {event.year} - {event.time}</p>
                         <p className="mb-1">Location: {event.location}</p>
-                        <button onClick={() => handleViewOnMap(event, index)} className="btn btn-secondary mt-2">View on Map</button>
-                        <a href={event.link} className="btn btn-primary mt-2">View Event</a>
                     </div>
                 ))}
             </div>
