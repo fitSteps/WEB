@@ -25,9 +25,7 @@ function Login() {
         if (data._id !== undefined) {
             userContext.setUserContext(data);
         } else {
-            setUsername("");
-            setPassword("");
-            setError("Invalid username or password");
+            setError(data.message);
         }
     }
 
