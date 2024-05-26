@@ -17,16 +17,15 @@ function Login() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 username: username,
-                password: password
+                password: password,
+                phoneUUID: "",
             })
         });
         const data = await res.json();
         if (data._id !== undefined) {
             userContext.setUserContext(data);
         } else {
-            setUsername("");
-            setPassword("");
-            setError("Invalid username or password");
+            setError(data.message);
         }
     }
 
