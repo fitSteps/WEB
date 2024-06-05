@@ -24,7 +24,11 @@ function Login() {
         const data = await res.json();
         if (data._id !== undefined) {
             userContext.setUserContext(data);
-        } else {
+        } 
+        else if (data = null) {
+            setError("Not authorized");
+        }
+        else {
             setError(data.message);
         }
     }
@@ -44,7 +48,7 @@ function Login() {
                     <input type="password" className="form-control" id="password" name="password" placeholder="Password"
                         value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                {error && <div className="alert alert-danger" role="alert">{error}</div>}
+                {error && <div className="text-danger text-center mt-3">{error}</div>}
                 <button type="submit" className="btn btn-primary w-100">Log in</button>
             </form>
         </div>
