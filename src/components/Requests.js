@@ -14,7 +14,7 @@ function Requests() {
     }, [user]);
 
     const fetchRequests = async () => {
-        const response = await fetch('http://localhost:3001/users/requests', {
+        const response = await fetch('http://188.230.209.59:3001/users/requests', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -28,7 +28,7 @@ function Requests() {
     };
 
     const handleAccept = async (friendId) => {
-        const response = await fetch(`http://localhost:3001/users/accept-friend/${friendId}`, {
+        const response = await fetch(`http://188.230.209.59:3001/users/accept-friend/${friendId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -42,7 +42,7 @@ function Requests() {
     };
 
     const handleReject = async (friendId) => {
-        const response = await fetch(`http://localhost:3001/users/reject-friend/${friendId}`, {
+        const response = await fetch(`http://188.230.209.59:3001/users/reject-friend/${friendId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'

@@ -53,7 +53,7 @@ function Events() {
     }, []);
 
     const fetchEvents = async () => {
-        const response = await fetch('http://localhost:3001/events', {
+        const response = await fetch('http://188.230.209.59:3001/events', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'

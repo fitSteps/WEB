@@ -14,7 +14,7 @@ function UserProfile() {
 
     useEffect(() => {
         const getProfile = async () => {
-            const res = await fetch(`http://localhost:3001/users/profile/${userId}`, { credentials: "include" });
+            const res = await fetch(`http://188.230.209.59:3001/users/profile/${userId}`, { credentials: "include" });
             const data = await res.json();
             setProfile(data);
             setIsFriendRequestSent(data.isFriendRequestSent);
@@ -26,7 +26,7 @@ function UserProfile() {
     }, [userId]);
 
     const handleAddFriend = async () => {
-        const res = await fetch(`http://localhost:3001/users/addFriendRequest`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/addFriendRequest`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: profile.username }),
@@ -38,7 +38,7 @@ function UserProfile() {
     };
 
     const handleCancelFriendRequest = async () => {
-        const res = await fetch(`http://localhost:3001/users/cancelFriendRequest`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/cancelFriendRequest`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: profile.username }),
@@ -50,7 +50,7 @@ function UserProfile() {
     };
 
     const handleUnfriend = async () => {
-        const res = await fetch(`http://localhost:3001/users/unfriend`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/unfriend`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: profile.username }),
@@ -62,7 +62,7 @@ function UserProfile() {
     };
 
     const handleAcceptFriendRequest = async () => {
-        const res = await fetch(`http://localhost:3001/users/accept-friend/${userId}`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/accept-friend/${userId}`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             credentials: "include"
@@ -74,7 +74,7 @@ function UserProfile() {
     };
 
     const handleRejectFriendRequest = async () => {
-        const res = await fetch(`http://localhost:3001/users/reject-friend/${userId}`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/reject-friend/${userId}`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             credentials: "include"
