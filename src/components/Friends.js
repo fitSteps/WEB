@@ -14,7 +14,7 @@ function Friends() {
     }, [user]);
 
     const fetchFriends = async () => {
-        const response = await fetch('http://localhost:3001/users/friends', {
+        const response = await fetch('http://188.230.209.59:3001/users/friends', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'  
@@ -28,7 +28,7 @@ function Friends() {
     };
 
     const handleUnfriend = async (friendUsername) => {
-        const response = await fetch(`http://localhost:3001/users/unfriend/`, {
+        const response = await fetch(`http://188.230.209.59:3001/users/unfriend/`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: friendUsername }),

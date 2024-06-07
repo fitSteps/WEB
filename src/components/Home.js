@@ -27,14 +27,14 @@ function Home() {
     }, [selectedDate, chartDate, chartMetric]);
 
     const getProfile = async () => {
-        const res = await fetch("http://localhost:3001/users/profile", { credentials: "include" });
+        const res = await fetch("http://188.230.209.59:3001/users/profile", { credentials: "include" });
         const data = await res.json();
         setProfile(data);
     };
 
     const getMovements = async (date) => {
         const formattedDate = formatDate(date);
-        const res = await fetch(`http://localhost:3001/users/movements/${formattedDate}`, {
+        const res = await fetch(`http://188.230.209.59:3001/users/movements/${formattedDate}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             credentials: "include"
@@ -50,7 +50,7 @@ function Home() {
 
         for (let i = 0; i <= 6; i++) {
             const day = addDays(startDate, i);
-            const res = await fetch(`http://localhost:3001/users/movements/${formatDate(day)}`, {
+            const res = await fetch(`http://188.230.209.59:3001/users/movements/${formatDate(day)}`, {
                 method: "GET",
                 headers: { 'Content-Type': 'application/json' },
                 credentials: "include"

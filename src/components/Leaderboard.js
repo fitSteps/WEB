@@ -12,8 +12,8 @@ function Leaderboard() {
         console.log("Fetching leaderboard data...");
         setIsLoading(true);
         Promise.all([
-            fetch('http://localhost:3001/users/leaderboard'),
-            fetch('http://localhost:3001/movements/top-movements')
+            fetch('http://188.230.209.59:3001/users/leaderboard'),
+            fetch('http://188.230.209.59:3001/movements/top-movements')
         ])
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(data => {

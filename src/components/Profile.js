@@ -69,7 +69,7 @@ function Profile() {
 
   useEffect(() => {
     const getProfile = async () => {
-      const res = await fetch("http://localhost:3001/users/profile", { credentials: "include" });
+      const res = await fetch("http://188.230.209.59:3001/users/profile", { credentials: "include" });
       const data = await res.json();
       setProfile(data);
     };
@@ -77,7 +77,7 @@ function Profile() {
   }, []);
 
   const handleAddFriend = async () => {
-    const res = await fetch(`http://localhost:3001/users/addFriendRequest`, {
+    const res = await fetch(`http://188.230.209.59:3001/users/addFriendRequest`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: usernameToAdd }),
@@ -90,7 +90,7 @@ function Profile() {
   const handleVideoSubmit = (videoBlob) => {
     const formData = new FormData();
     formData.append("video", videoBlob, "faceUnlockVideo.mp4");
-    fetch("http://localhost:3001/users/uploadVideo", {
+    fetch("http://188.230.209.59:3001/users/uploadVideo", {
       method: "POST",
       body: formData,
       credentials: 'include'
