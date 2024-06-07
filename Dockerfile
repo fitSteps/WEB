@@ -1,23 +1,26 @@
-# Use the official Node.js 18 Alpine image as base
-FROM node:18-alpine
+# Stage 1: Build the React application
+FROM node:20 as builder
 
-# Install tzdata package for timezone data
-RUN apk add --no-cache tzdata
-
-# Set the timezone environment variable
-ENV TZ=Europe/Ljubljana
-
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . .
+# Copy the package.json and package-lock.json (or yarn.lock)
+COPY package*.json ./
 
-# Install dependencies using npm (assuming package.json is present)
+# Install dependencies
 RUN npm install
 
-# Expose port 3000 to the outside world
-EXPOSE 3000
+# Copy the rest of your app's source code
+COPY . .
 
-# Command to run the application
-CMD ["node", "server.js"]
+# Build your app
+RUN npm run build
+
+# Stage 2: Serve the app with Nginx
+FROM nginx:stable-alpine
+
+# Copy the build output to replace the default nginx contents.
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Launch nginx
+CMD ["nginx", "-g", "daemon off;"]
