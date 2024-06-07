@@ -1,23 +1,26 @@
-# Use the official Node.js 18 Alpine image as base
-FROM node:18-alpine
+# Use an official Node.js runtime as a parent image
+FROM node:16
 
-# Install tzdata package for timezone data
-RUN apk add --no-cache tzdata
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Set the timezone environment variable
-ENV TZ=Europe/Ljubljana
+# Copy the package.json and package-lock.json
+COPY package*.json ./
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . .
-
-# Install dependencies using npm (assuming package.json is present)
+# Install dependencies
 RUN npm install
 
-# Expose port 3000 to the outside world
-EXPOSE 3000
+# Bundle app source inside Docker image
+COPY . .
 
-# Command to run the application
-CMD ["node", "server.js"]
+# Build your app
+RUN npm run build
+
+# Install serve to serve your app on port 3000
+RUN npm install -g serve
+
+# Command to run your app using serve
+CMD ["serve", "-s", "build", "-l", "3000"]
+
+# Expose port 3000
+EXPOSE 3000

@@ -9,7 +9,7 @@ function DataFaker() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const date = "2024-05-15";
+        const date = "2024-06-02";
         const response = await fetch(`http://localhost:3001/users/movements/${date}`, {
             method: 'PUT',
             credentials: 'include',
